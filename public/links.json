@@ -1,0 +1,12 @@
+{
+  "yy4080.pages.dev": [
+    { "name": "A影视", "url": "https://a.com" },
+    { "name": "A导航", "url": "https://nav.a.com" }
+  ],
+  "b.com": [
+    { "name": "B影视", "url": "https://b.com" }
+  ],
+  "*": [
+    { "name": "默认资源站", "url": "https://example.com" }
+  ]
+}

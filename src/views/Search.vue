@@ -1,0 +1,8 @@
+<template><div class="container py-3"><div class="row"><template v-if="loading"><div class="col-video mb-3" v-for="i in 10" :key="'sk-'+i"><VideoCardSkeleton /></div></template><template v-else><div class="col-video mb-3" v-for="v in list" :key="v.vod_id"><VideoCard :item="v" /></div></template></div><Pagination :page="page" :total="totalPage" @change="changePage" /></div></template>
+<script setup>
+import { ref,watch } from 'vue'; import { useRoute,useRouter } from 'vue-router'; import { searchVideo } from '../api/cms'; import VideoCard from '../components/VideoCard.vue'; import VideoCardSkeleton from '../components/VideoCardSkeleton.vue'; import Pagination from '../components/Pagination.vue'
+const route=useRoute(),router=useRouter(),list=ref([]),loading=ref(false),wd=ref(''),page=ref(1),totalPage=ref(1)
+function decodeKeyword(value){const text=String(value||'').trim();try{return decodeURIComponent(text)}catch{return text}} function syncRoute(){wd.value=decodeKeyword(route.query.wd);const value=Number(route.query.page||1);page.value=Number.isInteger(value)&&value>0?value:1}
+async function loadData(){syncRoute();if(!wd.value){list.value=[];totalPage.value=1;return}loading.value=true;try{const res=await searchVideo(wd.value,page.value);list.value=res?.data?.list||res?.data?.data||[];totalPage.value=Number(res?.data?.pagecount||res?.data?.totalPage||1);document.title=`${wd.value}相关视频-18XX`}catch(error){console.error('搜索失败:',error);list.value=[];totalPage.value=1}finally{loading.value=false}}
+function changePage(nextPage){const target=Number(nextPage);if(target===page.value)return;router.push({name:'search',query:{wd:wd.value,page:String(target)}})} watch(()=>route.fullPath,loadData,{immediate:true})
+</script>
