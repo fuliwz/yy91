@@ -1,6 +1,12 @@
 <template>
   <footer class="site-footer">
-    <div class="footer-inner"><div class="footer-brand"><span class="footer-mark"><i class="bi bi-play-fill"></i></span><div><strong>18XX</strong><small>Discover · Watch · Enjoy</small></div></div><div class="footer-copy">© 2026 18XX · All rights reserved.</div></div>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-mark"><i class="bi bi-play-fill"></i></span>
+        <div><strong>YY91</strong><small>Discover · Watch · Enjoy</small></div>
+      </div>
+      <div class="footer-copy">© 2026 YY91 · All rights reserved.</div>
+    </div>
   </footer>
 </template>
 <script setup>
