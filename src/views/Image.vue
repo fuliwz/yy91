@@ -8,19 +8,14 @@
       </div>
     </div>
 
-    <div class="image-grid" v-if="list.length">
-      <article v-for="item in list" :key="item.id || item.image_id" class="image-card">
-        <img :src="item.cover || item.url" :alt="item.title || 'image'">
-        <h3>{{ item.title || item.name }}</h3>
-      </article>
-    </div>
-
+    <ImageGrid v-if="list.length" :list="list" />
     <div v-else class="empty-panel">暂无图片内容</div>
   </main>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import ImageGrid from '../components/image/ImageGrid.vue'
 import { getImages } from '../api/image'
 
 const list = ref([])
@@ -35,5 +30,6 @@ async function load(){
     list.value = []
   }
 }
+
 load()
 </script>
